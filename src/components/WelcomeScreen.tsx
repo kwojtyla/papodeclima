@@ -1,5 +1,12 @@
 import React from "react";
-import { Play, TreePine, Waves, Target } from "lucide-react";
+import { Play, Target } from "lucide-react";
+import {
+  InstructionCard,
+  InstructionCardContent,
+  InstructionCardHeader,
+} from "./InstructionCard";
+import { Button } from "./Button";
+import { Footer } from "./Footer";
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -7,73 +14,49 @@ interface WelcomeScreenProps {
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-blue-50 to-green-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full">
-        <div className="text-center mb-8">
-          <div className="relative inline-block mb-6">
-            <div className="w-20 h-20 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto">
-              <TreePine className="w-10 h-10 text-white" />
-            </div>
-            <div className="absolute -top-1 -right-1">
-              <Waves className="w-8 h-8 text-blue-400" />
-            </div>
-          </div>
-
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-4">
-            EcoMangue Quiz
-          </h1>
-          <p className="text-xl text-gray-600 mb-2">
+    <main className="min-h-screen bg-[url('/background.webp')] bg-cover bg-no-repeat flex items-center justify-center p-4">
+      <article className="space-y-4 bg-[url('/background-modal.webp')] rounded-2xl shadow-2xl py-12 px-4 md:px-12 max-w-2xl w-full">
+        <section className="text-center flex flex-col items-center gap-3 text-primary">
+          <h1 className="text-6xl font-bold">Papo de Clima</h1>
+          <p className="text-2xl">
             Combatendo Fake News sobre Mudanças Climáticas
           </p>
-          <p className="text-gray-500">
+          <p className="text-base">
             Teste seus conhecimentos e ajude a proteger os manguezais!
           </p>
-        </div>
+        </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200">
-            <div className="flex items-center space-x-3 mb-3">
-              <Target className="w-6 h-6 text-green-600" />
-              <h3 className="font-semibold text-gray-800">Objetivo</h3>
-            </div>
-            <p className="text-gray-600 text-sm">
+        <section className="flex flex-col md:flex-row gap-1 md:gap-4">
+          <InstructionCard className="md:w-1/2">
+            <InstructionCardHeader>
+              <Target className="w-6 h-6 text-primary" />
+              Objetivo
+            </InstructionCardHeader>
+            <InstructionCardContent>
               Identifique fatos e fake news sobre o impacto das mudanças
-              climáticas nos manguezais
-            </p>
-          </div>
+              climáticas nos manguezais e ganhe pontos na jornada
+            </InstructionCardContent>
+          </InstructionCard>
+          <InstructionCard className="md:w-1/2">
+            <InstructionCardHeader>
+              <Play className="w-6 h-6 text-primary" />
+              Como Jogar
+            </InstructionCardHeader>
+            <InstructionCardContent>
+              Leia cada afirmação e escolha se é um FATO{" "}
+              <span className="font-bold">(Não que não!)</span> ou FAKE{" "}
+              <span className="font-bold">(É papo!)</span>. Receba explicações
+              detalhadas!
+            </InstructionCardContent>
+          </InstructionCard>
+        </section>
 
-          <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-xl border border-blue-200">
-            <div className="flex items-center space-x-3 mb-3">
-              <Play className="w-6 h-6 text-blue-600" />
-              <h3 className="font-semibold text-gray-800">Como Jogar</h3>
-            </div>
-            <p className="text-gray-600 text-sm">
-              Leia cada afirmação e escolha se é um FATO ou FAKE. Receba
-              explicações detalhadas!
-            </p>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-6 rounded-xl mb-8">
-          <h3 className="font-semibold text-gray-800 mb-3 text-center">
-            Por que os Manguezais são Importantes?
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
-            <div>• Sequestram 10x mais carbono que florestas</div>
-            <div>• Protegem contra tempestades e erosão</div>
-            <div>• Berçário para 75% dos peixes comerciais</div>
-            <div>• Filtram poluentes da água naturalmente</div>
-          </div>
-        </div>
-
-        <button
-          onClick={onStart}
-          className="w-full bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 text-lg"
-        >
+        <Button onClick={onStart} variant="default">
           <Play className="w-6 h-6" />
-          <span>Começar Quiz</span>
-        </button>
-      </div>
-    </div>
+          <span className="font-bold text-3xl">Começar</span>
+        </Button>
+        <Footer />
+      </article>
+    </main>
   );
 };

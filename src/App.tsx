@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { WelcomeScreen } from "./components/WelcomeScreen";
 import { GameHeader } from "./components/GameHeader";
 import { QuestionCard } from "./components/QuestionCard";
@@ -39,22 +39,22 @@ function App() {
     }));
   };
 
-  const handleNextQuestion = () => {
-    if (gameState.currentPhase >= questions.length) {
-      setGameState((prev) => ({
-        ...prev,
-        isGameComplete: true,
-      }));
-    } else {
-      setGameState((prev) => ({
-        ...prev,
-        currentPhase: prev.currentPhase + 1,
-        showExplanation: false,
-        selectedAnswer: null,
-        isAnswerCorrect: null,
-      }));
-    }
-  };
+  // const handleNextQuestion = () => {
+  //   if (gameState.currentPhase >= questions.length) {
+  //     setGameState((prev) => ({
+  //       ...prev,
+  //       isGameComplete: true,
+  //     }));
+  //   } else {
+  //     setGameState((prev) => ({
+  //       ...prev,
+  //       currentPhase: prev.currentPhase + 1,
+  //       showExplanation: false,
+  //       selectedAnswer: null,
+  //       isAnswerCorrect: null,
+  //     }));
+  //   }
+  // };
 
   const handleRestart = () => {
     setGameState({
@@ -70,16 +70,15 @@ function App() {
     setGameStarted(false);
   };
 
-  // Auto-advance after showing explanation
-  useEffect(() => {
-    if (gameState.showExplanation) {
-      const timer = setTimeout(() => {
-        handleNextQuestion();
-      }, 4000);
+  // useEffect(() => {
+  //   if (gameState.showExplanation) {
+  //     const timer = setTimeout(() => {
+  //       handleNextQuestion();
+  //     }, 4000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [gameState.showExplanation, gameState.currentPhase]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [gameState.showExplanation, gameState.currentPhase]);
 
   if (!gameStarted) {
     return <WelcomeScreen onStart={handleGameStart} />;
@@ -99,9 +98,9 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-blue-50 to-green-50">
+    <div className="min-h-screen bg-[url('/background.png')] bg-no-repeat bg-cover">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-transparent rounded-2xl shadow-2xl overflow-hidden">
           <GameHeader
             currentPhase={gameState.currentPhase}
             totalPhases={gameState.totalQuestions}

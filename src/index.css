@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: "Inconsolata", monospace;
+  }
+}
+
+@theme {
+  --color-primary: #74664a;
+  --color-secondary: #fff7eb;
+  --color-tertiary: #d7cec2;
+
+  --color-primary-hover: #594f3a;
+}
