@@ -5,6 +5,8 @@ import { QuestionCard } from "./components/QuestionCard";
 import { GameComplete } from "./components/GameComplete";
 import { questions } from "./data/questions";
 import type { GameState } from "./types/game";
+import { Button } from "./components/Button";
+import { ArrowRight } from "lucide-react";
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -39,22 +41,22 @@ function App() {
     }));
   };
 
-  // const handleNextQuestion = () => {
-  //   if (gameState.currentPhase >= questions.length) {
-  //     setGameState((prev) => ({
-  //       ...prev,
-  //       isGameComplete: true,
-  //     }));
-  //   } else {
-  //     setGameState((prev) => ({
-  //       ...prev,
-  //       currentPhase: prev.currentPhase + 1,
-  //       showExplanation: false,
-  //       selectedAnswer: null,
-  //       isAnswerCorrect: null,
-  //     }));
-  //   }
-  // };
+  const handleNextQuestion = () => {
+    if (gameState.currentPhase >= questions.length) {
+      setGameState((prev) => ({
+        ...prev,
+        isGameComplete: true,
+      }));
+    } else {
+      setGameState((prev) => ({
+        ...prev,
+        currentPhase: prev.currentPhase + 1,
+        showExplanation: false,
+        selectedAnswer: null,
+        isAnswerCorrect: null,
+      }));
+    }
+  };
 
   const handleRestart = () => {
     setGameState({
@@ -86,7 +88,7 @@ function App() {
 
   if (gameState.isGameComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-blue-50 to-green-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[url('/background.webp')] flex items-center justify-center p-4">
         <GameComplete
           score={gameState.score}
           correctAnswers={gameState.correctAnswers}
@@ -98,9 +100,9 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[url('/background.png')] bg-no-repeat bg-cover">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="bg-transparent rounded-2xl shadow-2xl overflow-hidden">
+    <main className="min-h-screen bg-[url('/background.webp')] bg-no-repeat bg-cover flex items-center justify-center p-4">
+      <div className="container m-auto px-4 py-8 max-w-4xl">
+        <div className="bg-[url('/background-modal.webp')] rounded-2xl shadow-2xl overflow-hidden">
           <GameHeader
             currentPhase={gameState.currentPhase}
             totalPhases={gameState.totalQuestions}
@@ -108,7 +110,7 @@ function App() {
             correctAnswers={gameState.correctAnswers}
           />
 
-          <div className="p-8">
+          <div className="px-4 md:px-8 py-6 space-y-4">
             <QuestionCard
               question={currentQuestion}
               selectedAnswer={gameState.selectedAnswer}
@@ -118,19 +120,19 @@ function App() {
             />
 
             {gameState.showExplanation && (
-              <div className="mt-6 text-center">
-                <div className="inline-flex items-center space-x-2 text-gray-600 bg-gray-100 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
-                  <span className="text-sm">
-                    Próxima pergunta em alguns segundos...
-                  </span>
-                </div>
-              </div>
+              <Button className="w-fit mx-auto" onClick={handleNextQuestion}>
+                <span className="text-2xl">
+                  {gameState.currentPhase === 10
+                    ? "Finalizar quiz"
+                    : "Próxima questão"}
+                </span>
+                <ArrowRight />
+              </Button>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
