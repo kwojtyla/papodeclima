@@ -1,9 +1,11 @@
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+
 export interface Question {
   id: number;
   statement: string;
+  compiledStatement?: MDXRemoteSerializeResult;
   isTrue: boolean;
   explanation: string;
-  category: "biodiversity" | "climate" | "ecosystem" | "conservation";
 }
 
 export interface GameState {
