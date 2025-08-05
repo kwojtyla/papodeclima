@@ -72,16 +72,6 @@ function App() {
     setGameStarted(false);
   };
 
-  // useEffect(() => {
-  //   if (gameState.showExplanation) {
-  //     const timer = setTimeout(() => {
-  //       handleNextQuestion();
-  //     }, 4000);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [gameState.showExplanation, gameState.currentPhase]);
-
   if (!gameStarted) {
     return <WelcomeScreen onStart={handleGameStart} />;
   }
