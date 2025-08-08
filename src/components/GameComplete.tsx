@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Trophy, RefreshCw, Share2 } from "lucide-react";
 import { Button } from "./Button";
 import { Footer } from "./Footer";
+import { ShareModal } from "./ShareModal";
 
 interface GameCompleteProps {
   score: number;
@@ -16,6 +17,7 @@ export const GameComplete: React.FC<GameCompleteProps> = ({
   totalQuestions,
   onRestart,
 }) => {
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const percentage = Math.round((correctAnswers / totalQuestions) * 100);
 
   const getPerformanceMessage = () => {
@@ -97,14 +99,18 @@ export const GameComplete: React.FC<GameCompleteProps> = ({
           <RefreshCw className="w-5 h-5" />
           <span className="text-2xl">Jogar Novamente</span>
         </Button>
-        <Button
-          variant="secondary"
-          onClick={() => alert("Compartilhar em breve!")}
-        >
+        <Button variant="secondary" onClick={() => setIsShareModalOpen(true)}>
           <Share2 className="w-5 h-5" />
           <span className="text-2xl">Compartilhar</span>
         </Button>
       </div>
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        score={score}
+        correctAnswers={correctAnswers}
+        totalQuestions={totalQuestions}
+      />
       <Footer />
     </div>
   );
