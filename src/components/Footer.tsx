@@ -6,9 +6,9 @@ export const Footer: React.FC = () => {
         <span className="text-black text-base text-nowrap">um produto</span>
         <div className="border border-t border-[#C7BBA2] w-full" />
       </div>
-      <div className="flex flex-col md:flex-row items-center w-full justify-center">
+      <div className="flex flex-col items-center w-full justify-center">
         <img src="/logo-observatorio.png" alt="Logo Observatório" />
-        <img src="/marcas.png" alt="Logo Observatório" />
+        <img src="/marcas.png" alt="Logo dos Apoiadores" />
       </div>
     </section>
   );
